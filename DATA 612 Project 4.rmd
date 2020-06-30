@@ -4,17 +4,17 @@ subtitle: "Data 612 Project 4"
 author: "Paul Perez & William Outcault"
 date: "`r format(Sys.time(), '%d %B %Y')`"
 output:
+  pdf_document:
+    toc: yes
   html_document:
     highlight: pygments
     theme: cerulean
     toc: yes
     toc_float:
       collapsed: yes
-  pdf_document:
-    toc: yes
 ---
 
---- 
+\newpage
 
 # Introduction
 
@@ -36,8 +36,6 @@ _Deliverables_
 3. Compare and report on any change in accuracy before and after you’ve made the change in #2. 
 
 4. As part of your textual conclusion, discuss one or more additional experiments that could be performed and/or metrics that could be evaluated only if online evaluation was possible.  Also, briefly propose how you would design a reasonable online evaluation environment. 
-
---- 
 
 ```{r setup, include=FALSE, cache=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
@@ -64,8 +62,6 @@ Data shows high turnover rates between users and their choice of streaming platf
 
 Our approach will be to maximize precision by optimizing the choice of algorithms, evaluation schema methods, and parameters. This will be done using exploratory analysis and by evaluating a series of different models.
 
---- 
-
 \newpage
 
 # Data Exploration
@@ -81,7 +77,7 @@ dim(matrix)
 ```
 There are `943` users and `1664` movies.
 
-### Similarity Matrices
+## Similarity Matrices
 
 The similarity matrix measures the similarity between item's or user's within the matrix. For the purpose of this project, we'll use the `cosine` method. 
 
@@ -117,20 +113,20 @@ table_ratings <- table(vector_ratings)
 table_ratings %>% kable(caption = "Item Similarity Table") %>% kable_styling("striped", full_width = TRUE)
 ```
 
-### Rating Distributions
+## Rating Distributions
 ```{r}
 vector_ratings <- factor(vector_ratings)
 qplot(vector_ratings) + ggtitle("Distribution of Ratings")
 ```
 
-### Relevant Data
+## Relevant Data
 
 We can subset this data to select users who have rated at least 95 movies, and movies that have been watched at least 50 times. The dimension of the matrix changes from 943 x 1664 to 369 x 691
 ```{r}
 movie_ratings <- matrix[rowCounts(matrix) > 95, colCounts(matrix) > 50]
 dim(movie_ratings)
 ```
-### Top 1% of Users
+## Top 1% of Users
 
 ```{r}
 min_movies <- quantile(rowCounts(matrix, na.rm = TRUE), 0.99)
@@ -138,7 +134,7 @@ min_users <- quantile(colCounts(matrix, na.rm = TRUE), 0.99)
 image(matrix[rowCounts(matrix) > min_movies, colCounts(matrix) > min_users], main = "Heatmap of the top users and movies")
 ```
 
-### Average Rating (User) Distribution
+## Average Rating (User) Distribution
 
 ```{r}
 average_rating <- rowMeans(movie_ratings)
@@ -157,7 +153,7 @@ We will proceed by testing the performance using algorithms so far discussed thi
 
 Before discussing algorithms we will go through each evaluation scheme method.
 
-### Split
+## Split
 
 We begin by using `recommenderlab`'s split method to sample 80% of the samples rows for training and 20% for testing.
 
@@ -178,7 +174,7 @@ users_in_testing <- nrow(getData(split_eval_sets, "known")) / nrow(movie_ratings
 print(paste("Percentage of users in the testing set: ",round(users_in_testing,2)*100,"%", sep=""))
 ```
 
-### Cross-Validation
+## Cross-Validation
 
 Next we will use cross-validation method to create models using k-fold validation sets. The samples remain 80/20 for training/testing respectively.
 
@@ -194,7 +190,7 @@ print(paste("Percentage of users in the testing set: ",round(users_in_testing,2)
 ```
 
 
-### Bootstrap
+## Bootstrap
 
 We will implement `recommenderlab`'s bootstrapping method. The difference will be a larger test set if we continue to use 80% of rows for the training, because bootstrapping samples the rows with replacement allowing us to sample one user more than once.
 
@@ -264,7 +260,7 @@ avg_conf_matr <- function(results) {
 
 # Results
 
-### Results from Split Method
+## Results from Split Method
 
 ```{r, fig.show="hold", out.width="50%", fig.height=5}
 split_results_tbl <- split_results %>% map(avg_conf_matr) %>% enframe()
@@ -287,7 +283,7 @@ split_results_tbl %>%
   theme_grey(base_size = 14)
 ```
 
-### Results from Cross-Val Method
+## Results from Cross-Val Method
 
 ```{r, fig.show="hold", out.width="50%", fig.height=5}
 cv_results_tbl <- cross_val_results %>% map(avg_conf_matr) %>% enframe()
@@ -308,7 +304,7 @@ cv_results_tbl %>%
   theme_grey(base_size = 14)
 ```
 
-### Results from Bootstrap Method
+## Results from Bootstrap Method
 
 ```{r, fig.show="hold", out.width="50%", fig.height=5}
 bs_results_tbl <- bootstrap_results %>% map(avg_conf_matr) %>% enframe()
@@ -329,11 +325,13 @@ bs_results_tbl %>%
   theme_grey(base_size = 14)
 ```
 
+\newpage
+
 # Conclusion
 
 To reiterate, our goal is to maximize precision in order to reduce customer turnover rates. We performed exploratory analysis, split the data using three different evaluation schema methods, created six different models for each schema, and plotted our results. In conclusion, by using User-Based Collaborative Filtering with the pearson method we can maximize precision and minimize customer turnover rates.
 
-# Further Exploration
+## Further Experiments
 
 I would love to conduct further experiments to calculate diversity using online evaluations. The main priority in our project was to maximize precision so that we could confidently suggest a movie that the customer would like. 
 
