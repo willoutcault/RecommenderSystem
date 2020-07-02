@@ -1,0 +1,57 @@
+---
+title: "Final Project Planning Document"
+subtitle: "Data 612 - Final Project"
+author: "Paul Perez & William Outcault"
+date: "`r format(Sys.time(), '%d %B %Y')`"
+output:
+  pdf_document:
+    toc: yes
+  html_document:
+    highlight: pygments
+    theme: cerulean
+    toc: yes
+    toc_float:
+      collapsed: yes
+---
+
+## Project:
+
+Song Recommender System
+
+ 
+
+## Introduction:
+
+Understanding that recommender engines are found everywhere online, as well as in the media we consume, we’d like to build a song recommendation system. Different platforms like Pandora and Spotify recommend songs and playlists based on a user’s listening trends. Since we’ve been exposed to numerous types of recommender engines, item based and user based collaborative filters, we’d like to take a hybrid approach. Additionally, we’d like to explore content based recommender systems being that there is a lot of meta data around songs. Using the algorithm built off of the dataset, we want to leverage the Spotify API, and create recommended playlists for a group of users.
+
+ 
+
+## Dataset:
+
+Million Song Data Set – “A freely-available collection of audio features and metadata for a million  contemporary popular music tracks”
+
+http://millionsongdataset.com/
+
+This is a cluster of data sets contributed by the community:
+
+SecondHandSongs
+musiXmatch
+Last.fm
+Taste Profile
+Thisismyjam-to-MSD
+Tagtraum
+Top MAGD
+ 
+
+The entire dataset is 280GB, and we plan to utilize Spark to handle this data, but if we run into any issue, we’ll use the subset of the dataset that is 10,000 songs (1.8GB compressed)
+
+
+## Language:
+
+Python, PySpark
+
+ 
+
+## Methodology:
+
+Possible Item-Item or User-User, maybe SVD, would like to try to create a content based recommender with the meta data of this
