@@ -54,4 +54,4 @@ Python, PySpark
 
 ## Methodology:
 
-Possible Item-Item or User-User, maybe SVD, would like to try to create a content based recommender with the meta data of this
+Experiment with Item-Item, User-User, SVD, ALS and/or Content-Based.
