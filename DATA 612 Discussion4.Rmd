@@ -1,0 +1,17 @@
+---
+title: "Mitigating the Harm of Recommender Systems"
+subtitle: "DATA612 - Recommender Systems"
+author: "William Outcault"
+date: "`r format(Sys.time(), '%d %B %Y')`"
+output:
+  html_document:
+    highlight: pygments
+    theme: cerulean
+---
+
+With the hype of all new public streaming and entertainment platforms exponentially increasing, the pitfalls of recommender systems have been all to clear. The results have been an angry mob type mentality. Specifically Youtube and the platform's content creator who feel silenced, as if their first ammendment right was stomped on in front of them. There are many different avenues to talk about, such as the truth of the matter or the ethicacy of the silencing. Personally I feel if a streaming platform should be similar to that of a resturant, if an individual is being disruptive towards their communicty then you should have the right to tell them to leave. However, what we will foucs on in this report is the potential solution for a recommendation engine to mitigate harm.
+
+Renee Diresta, author of _Up Next: A Better Recommendation System_, stresses that choice architecture could be a potential solution to this issue. According to the all-knowing wikipedia, choice architecture exists in permission marketing, and shaping operations in military science. It is the idea of changing an individuals outcomes without changing that individual's underlying preferences... seems tricky. Choice engineering is one way to implement choice architecture, where you may simply steer an individual towards a decision rather than mandating choices. In the context of Youtube or Facebook (probably the most controvercial recommendation engines out there), this may mean providing contrast within the suggested content. Instead of limiting your viewer to one category that fits the user's stereotype, you include a little of something outside there realm, in addition to some some aesthetically pleasing video or article that might have been their only suggestion in the first place. This way consumers are not forced down some one way street, instead there are multiple avenues and a gentle gust of wind encouraging that normally mandated video.
+
+It would be ideal to implement a transparent recommender engine where a team can go in and clear up any confusion, or justify treatment towards specific individuals. Telling your platform user that "it's just the algorithm, and there is no way for me to stop it" is a rediculoussly horrible approach to maintaining customer satisfaction. Instead of creating the most sticky platforms possible, they should implement a more genuine approach and recommend content that is not as stereotypical towards that individual. Introduce contrast and operate at a more granular level. If you go to a resturant that serves three courses all of which are the chef's choice, they're not going to serve you three chicken sandwiches all with different toppings because that's the most ordered item on the menu. They will serve you a soup with popular seasonings/flavors, a chicken-based dish and a desert even though you hate desert. That metaphor was out of hand, but in my opinion I feel a little contrast and simplicity within a recommender system is a great step forward towards a less harmful engine. 
+
